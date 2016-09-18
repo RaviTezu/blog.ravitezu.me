@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>PostgreSQL cheat sheet &middot; RaviTezu</title>
+        <meta name="description" content="Engineer • Hacker • Optimist • Runner • Gopher">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.16" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://blog.ravitezu.mecss/normalize.css">
+        <link rel="stylesheet" href="http://blog.ravitezu.mecss/highlight.css">
+        <link rel="stylesheet" href="http://blog.ravitezu.mecss/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84283793-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="RaviTezu | Blog" href="http://blog.ravitezu.me">RaviTezu | Blog</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://blog.ravitezu.meindex.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/RaviTezu">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/ravitezu">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" title="Stack Overflow" href="http://stackoverflow.com/users/1280320/ravitezu">
+                                <i class="fa fa-stack-overflow"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://in.linkedin.com/pub/raviteja-pothana/46/772/354">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Blog" href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Projects" href="/project/">Projects</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Contact" href="/page/contact/">Contact</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="/page/about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">PostgreSQL cheat sheet</h1>
+    
+    <p class="post-date">
+        <span>Published <time datetime="2015-02-15" itemprop="datePublished">Sun, Feb 15, 2015</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+            <span itemprop="name">
+                <a href="https://twitter/ravitezu" itemprop="url" rel="author">RaviTezu</a>
+            </span>
+        </span>
+    </p>
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>This article mainly focuses on the Ownership/Permissions of database objects. I had to collect these for migrating a standalone PostgreSQL database to <a href="http://aws.amazon.com/rds/">Amazon RDS</a>(Relational Database Service) PostgreSQL and I will be updating this article as long as I find something which belongs here. <br/>
+All these commands are supposed to be executed in the <code>psql</code> command line. Adding “+” sign to most of the command gives you more information of those objects.</p>
+
+<ul>
+<li><p>How to get help in psql command line:</p>
+
+<pre><code>\? 
+</code></pre></li>
+
+<li><p>How to list the databases:</p>
+
+<pre><code class="language-bash">\l or \l+
+</code></pre></li>
+
+<li><p>How to connect to a different database with in the shell:</p>
+
+<pre><code class="language-bash">\c &lt;database-name&gt; or \connect &lt;database-name&gt;
+</code></pre></li>
+
+<li><p>How to list all the schemas in a database:</p>
+
+<pre><code class="language-bash">\dn or \dn+
+</code></pre></li>
+
+<li><p>How to list all tables in a schema:</p>
+
+<pre><code class="language-bash">\dt &lt;schema-name&gt;.* or \dt+ &lt;schema-name&gt;.*
+</code></pre></li>
+
+<li><p>How to list all tables in a database:</p>
+
+<pre><code class="language-bash">\dt *.* or \dt+ *.*
+</code></pre></li>
+
+<li><p>How to list all views in a schema:</p>
+
+<pre><code class="language-bash">\dv or \dv+
+</code></pre></li>
+
+<li><p>How to list all views in a database:</p>
+
+<pre><code class="language-bash">\dv *.* or \dv+ *.*
+</code></pre></li>
+
+<li><p>How to know the permissions on tables and views:</p>
+
+<pre><code class="language-bash">\dp+ &lt;schema-name&gt;.*;
+</code></pre></li>
+
+<li><p>How to list all the functions:</p>
+
+<pre><code class="language-bash">\df or \df+
+</code></pre></li>
+
+<li><p>How to list all the sequences in all schemas:</p>
+
+<pre><code class="language-bash">\ds+ *.*;
+</code></pre></li>
+
+<li><p>How to create a role in postgres:</p>
+
+<pre><code class="language-bash">CREATE ROLE bob WITH PASSWORD 'bobpassword';
+</code></pre></li>
+
+<li><p>How to create a user in posrgres:</p>
+
+<pre><code class="language-bash">CREATE USER alice WITH PASSWORD 'alicepassword';
+</code></pre>
+
+<p><em>Note:</em> The keywords <em>ROLE</em> and <em>USER</em> are synonyms in PostgreSQL, however the difference between them is, when you use <em>USER</em>, the role will be created with <em>LOGIN</em> privileges.</p></li>
+
+<li><p>How to create a group in postgres:</p>
+
+<pre><code class="language-bash">CREATE GROUP developers; 
+</code></pre></li>
+
+<li><p>How to create a schema in a database:</p>
+
+<pre><code class="language-bash">CREATE SCHEMA minions AUTHORIZATION gru;
+</code></pre></li>
+
+<li><p>How to grant SELECT privileges on all tables to a group:<br/>
+<em>Note: Before you grant SELECT privileges to a role/group you need to give USAGE privileges to that role on the schemas those tables are in.</em></p>
+
+<pre><code class="language-bash">GRANT USAGE ON SCHEMA application TO developers; 
+GRANT SELECT ON ALL TABLES IN SCHEMA application TO developers;
+</code></pre></li>
+
+<li><p>How to add roles to a group:</p>
+
+<pre><code class="language-bash">GRANT developers TO bob,alice; 
+</code></pre></li>
+
+<li><p>How to grant ALL permissions to a role on tables in a schema:</p>
+
+<pre><code class="language-bash">GRANT ALL ON SCHEMA application TO developers;
+GRANT ALL ON ALL TABLES IN SCHEMA application TO app_user; 
+</code></pre></li>
+
+<li><p>How to know the current database:</p>
+
+<pre><code class="language-bash">SELECT current_database();
+</code></pre></li>
+
+<li><p>How to know the current user:</p>
+
+<pre><code class="language-bash">SELECT current_user;
+</code></pre></li>
+
+<li><p>How to list all the functions in a schema with arguments it take:</p>
+
+<pre><code class="language-bash">SELECT proname || '(' || pg_catalog.pg_get_function_identity_arguments(pr.oid) || ')', n.nspname FROM pg_proc pr join pg_namespace n ON pr.pronamespace = n.oid WHERE n.nspname IN ('&lt;schema1&gt;','&lt;schema2&gt;');
+</code></pre></li>
+
+<li><p>How to change the ownership on a function:</p>
+
+<pre><code class="language-bash">ALTER FUNCTION &lt;schema-name, if-needed&gt;.&lt;function name with arguments, from the output of above query&gt; OWNER TO 'new-owner';
+</code></pre></li>
+
+<li><p>How to grant EXECUTE permission on a function:</p>
+
+<pre><code class="language-bash">GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA application TO app_user;
+</code></pre></li>
+
+<li><p>How to list all the functions in a schema along with the permissions on them:</p>
+
+<pre><code class="language-bash">SELECT oid::regprocedure, proacl FROM pg_proc WHERE proacl IS NOT NULL;
+</code></pre></li>
+
+<li><p>How to GRANT ALL permissions to sequences:</p>
+
+<pre><code class="language-bash">GRANT ALL ON ALL SEQUENCES IN SCHEMA appplication to admin;
+</code></pre></li>
+
+<li><p>How to change the search path for user:</p>
+
+<pre><code class="language-bash">ALTER ROLE app_user SET search_path TO application;
+</code></pre></li>
+
+<li><p>How to show the default permissions on schema:</p>
+
+<pre><code class="language-bash">SELECT nspname, defaclobjtype, defaclacl FROM pg_default_acl a JOIN pg_namespace b ON a.defaclnamespace=b.oid;
+</code></pre></li>
+
+<li><p>How to set default permissions on a schema(on Tables):</p>
+
+<pre><code class="language-bash">ALTER DEFAULT PRIVILEGES IN SCHEMA application GRANT SELECT ON TABLES TO developers;
+</code></pre></li>
+
+<li><p>How to revoke default permissions on a schema(on Tables):</p>
+
+<pre><code class="language-bash">ALTER DEFAULT PRIVILEGES IN SCHEMA application REVOKE ALL ON TABLES FROM developers;
+</code></pre></li>
+
+<li><p>How to get the start time of the database from PSQL:</p>
+
+<pre><code class="language-bash">SELECT pg_postmaster_start_time();
+</code></pre></li>
+
+<li><p>How to get the uptime, execute the query below:</p>
+
+<pre><code class="language-bash">SELECT now() - pg_postmaster_start_time();
+</code></pre></li>
+
+<li><p>How to get long running queries:</p>
+
+<pre><code class="language-bash">SELECT blockeda.pid AS blocked_pid, blockinga.pid AS blocking_pid, blockinga.query as blocking_query, blockeda.query as blocked_query FROM pg_catalog.pg_locks blockedl JOIN pg_stat_activity blockeda ON blockedl.pid = blockeda.pid JOIN pg_catalog.pg_locks blockingl ON(blockingl.transactionid=blockedl.transactionid AND blockedl.pid != blockingl.pid) JOIN pg_stat_activity blockinga ON blockingl.pid = blockinga.pid WHERE NOT blockedl.granted;
+</code></pre></li>
+</ul>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+
+    <div class="share">
+        <a class="icon-twitter" href="http://twitter.com/share?text=PostgreSQL%20cheat%20sheet&url=http%3a%2f%2fblog.ravitezu.me%2f2015%2f02%2f15%2fpostgresql-cheat-sheet%2f"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+            <i class="fa fa-twitter"></i>
+            <span class="hidden">Twitter</span>
+        </a>
+
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fblog.ravitezu.me%2f2015%2f02%2f15%2fpostgresql-cheat-sheet%2f"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+            <i class="fa fa-facebook"></i>
+            <span class="hidden">Facebook</span>
+        </a>
+
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fblog.ravitezu.me%2f2015%2f02%2f15%2fpostgresql-cheat-sheet%2f"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+           <i class="fa fa-google-plus"></i>
+            <span class="hidden">Google+</span>
+        </a>
+    </div>
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'blog-ravitezu-me';
+    var disqus_identifier = 'http:\/\/blog.ravitezu.me\/2015\/02\/15\/postgresql-cheat-sheet\/';
+    var disqus_title = 'PostgreSQL cheat sheet';
+    var disqus_url = 'http:\/\/blog.ravitezu.me\/2015\/02\/15\/postgresql-cheat-sheet\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="RaviTezu | Blog" href="http://blog.ravitezu.me">RaviTezu | Blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; Ravi Teja Pothana / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                </p>
+                
+            </div>
+        </footer>
+
+        <script src="http://blog.ravitezu.mejs/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+        <script src="http://blog.ravitezu.mejs/jquery.fitvids.js"></script>
+        <script src="http://blog.ravitezu.mejs/scripts.js"></script>
+    </body>
+</html>
+

@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on RaviTezu | Blog</title>
+    <link>http://blog.ravitezu.me/post/</link>
+    <description>Recent content in Posts on RaviTezu | Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ravi Teja Pothana</copyright>
+    <lastBuildDate>Sun, 15 Feb 2015 18:27:05 +0530</lastBuildDate>
+    <atom:link href="http://blog.ravitezu.me/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>PostgreSQL cheat sheet</title>
+      <link>http://blog.ravitezu.me/2015/02/15/postgresql-cheat-sheet/</link>
+      <pubDate>Sun, 15 Feb 2015 18:27:05 +0530</pubDate>
+      
+      <guid>http://blog.ravitezu.me/2015/02/15/postgresql-cheat-sheet/</guid>
+      <description>&lt;p&gt;This article mainly focuses on the Ownership/Permissions of database objects. I had to collect these for migrating a standalone PostgreSQL database to &lt;a href=&#34;http://aws.amazon.com/rds/&#34;&gt;Amazon RDS&lt;/a&gt;(Relational Database Service) PostgreSQL and I will be updating this article as long as I find something which belongs here. &lt;br/&gt;
+All these commands are supposed to be executed in the &lt;code&gt;psql&lt;/code&gt; command line. Adding “+” sign to most of the command gives you more information of those objects.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;How to get help in psql command line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;\? 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list the databases:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\l or \l+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to connect to a different database with in the shell:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\c &amp;lt;database-name&amp;gt; or \connect &amp;lt;database-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all the schemas in a database:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\dn or \dn+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all tables in a schema:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\dt &amp;lt;schema-name&amp;gt;.* or \dt+ &amp;lt;schema-name&amp;gt;.*
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all tables in a database:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\dt *.* or \dt+ *.*
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all views in a schema:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\dv or \dv+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all views in a database:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\dv *.* or \dv+ *.*
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to know the permissions on tables and views:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\dp+ &amp;lt;schema-name&amp;gt;.*;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all the functions:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\df or \df+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all the sequences in all schemas:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\ds+ *.*;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to create a role in postgres:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;CREATE ROLE bob WITH PASSWORD &#39;bobpassword&#39;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to create a user in posrgres:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;CREATE USER alice WITH PASSWORD &#39;alicepassword&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; The keywords &lt;em&gt;ROLE&lt;/em&gt; and &lt;em&gt;USER&lt;/em&gt; are synonyms in PostgreSQL, however the difference between them is, when you use &lt;em&gt;USER&lt;/em&gt;, the role will be created with &lt;em&gt;LOGIN&lt;/em&gt; privileges.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to create a group in postgres:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;CREATE GROUP developers; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to create a schema in a database:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;CREATE SCHEMA minions AUTHORIZATION gru;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to grant SELECT privileges on all tables to a group:&lt;br/&gt;
+&lt;em&gt;Note: Before you grant SELECT privileges to a role/group you need to give USAGE privileges to that role on the schemas those tables are in.&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;GRANT USAGE ON SCHEMA application TO developers; 
+GRANT SELECT ON ALL TABLES IN SCHEMA application TO developers;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to add roles to a group:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;GRANT developers TO bob,alice; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to grant ALL permissions to a role on tables in a schema:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;GRANT ALL ON SCHEMA application TO developers;
+GRANT ALL ON ALL TABLES IN SCHEMA application TO app_user; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to know the current database:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT current_database();
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to know the current user:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT current_user;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all the functions in a schema with arguments it take:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT proname || &#39;(&#39; || pg_catalog.pg_get_function_identity_arguments(pr.oid) || &#39;)&#39;, n.nspname FROM pg_proc pr join pg_namespace n ON pr.pronamespace = n.oid WHERE n.nspname IN (&#39;&amp;lt;schema1&amp;gt;&#39;,&#39;&amp;lt;schema2&amp;gt;&#39;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to change the ownership on a function:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ALTER FUNCTION &amp;lt;schema-name, if-needed&amp;gt;.&amp;lt;function name with arguments, from the output of above query&amp;gt; OWNER TO &#39;new-owner&#39;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to grant EXECUTE permission on a function:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA application TO app_user;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all the functions in a schema along with the permissions on them:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT oid::regprocedure, proacl FROM pg_proc WHERE proacl IS NOT NULL;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to GRANT ALL permissions to sequences:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;GRANT ALL ON ALL SEQUENCES IN SCHEMA appplication to admin;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to change the search path for user:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ALTER ROLE app_user SET search_path TO application;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to show the default permissions on schema:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT nspname, defaclobjtype, defaclacl FROM pg_default_acl a JOIN pg_namespace b ON a.defaclnamespace=b.oid;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to set default permissions on a schema(on Tables):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ALTER DEFAULT PRIVILEGES IN SCHEMA application GRANT SELECT ON TABLES TO developers;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to revoke default permissions on a schema(on Tables):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ALTER DEFAULT PRIVILEGES IN SCHEMA application REVOKE ALL ON TABLES FROM developers;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to get the start time of the database from PSQL:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT pg_postmaster_start_time();
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to get the uptime, execute the query below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT now() - pg_postmaster_start_time();
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to get long running queries:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT blockeda.pid AS blocked_pid, blockinga.pid AS blocking_pid, blockinga.query as blocking_query, blockeda.query as blocked_query FROM pg_catalog.pg_locks blockedl JOIN pg_stat_activity blockeda ON blockedl.pid = blockeda.pid JOIN pg_catalog.pg_locks blockingl ON(blockingl.transactionid=blockedl.transactionid AND blockedl.pid != blockingl.pid) JOIN pg_stat_activity blockinga ON blockingl.pid = blockinga.pid WHERE NOT blockedl.granted;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Fixing a recovering(forever?) Secondary mongodb node</title>
+      <link>http://blog.ravitezu.me/2014/08/04/fix-a-recovering-mongodb-node/</link>
+      <pubDate>Mon, 04 Aug 2014 17:54:35 +0530</pubDate>
+      
+      <guid>http://blog.ravitezu.me/2014/08/04/fix-a-recovering-mongodb-node/</guid>
+      <description>&lt;p&gt;I have recently come across a Secondary MongoDB Node in one of our clusters in &lt;em&gt;RECOVERING&lt;/em&gt; state for more than 5 days?
+This Article will help you in figuring out whether the node will be back to Normal state or not.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Steps:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;SSH into the &lt;em&gt;PRIMARY&lt;/em&gt; MongoDB node of the cluster and open its Mongo Shell:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ravitezu@mongo_pri:~ $ mongo MongoDB 
+shell version: 2.4.4 connecting to: test 
+rs1:PRIMARY&amp;gt; use blogdb switched to db blogdb
+
+rs1:PRIMARY&amp;gt; db.printReplicationInfo() 
+configured oplog size: 2048MB log length start to end: 202615secs (56.28hrs) 
+oplog first event time: Mon Aug 02 2014 13:06:36 GMT+0530 (IST) 
+oplog last event time: Wed Aug 04 2014 21:23:31 GMT+0530 (IST) 
+now: Wed Aug 04 2014 21:23:33 GMT+0530 (IST)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So, OPLOG on PRIMARY node is rotated every 56.28 hrs.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Now SSH into the &lt;em&gt;SECONDARY&lt;/em&gt; node which is in &lt;em&gt;RECEOVERING&lt;/em&gt; state and open its Mongo Shell:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ravitezu@mongo_sec:~ $ mongo MongoDB 
+rs1:RECOVERING&amp;gt; use blogdb 
+switched to db blogdb 
+rs1:RECOVERING&amp;gt; db.printReplicationInfo() 
+configured oplog size: 2048MB log length start to end: 602532secs (167.37hrs)
+oplog first event time: Mon Jul 21 2014 20:51:49 GMT+0530 (IST)
+oplog last event time: Mon Jul 28 2014 20:14:01 GMT+0530 (IST)
+now: Mon Aug 04 2014 21:24:38 GMT+0530 (IST) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here, the last event on this &lt;em&gt;SECONDARY&lt;/em&gt; node happened at &lt;code&gt;Mon Jul 28 2014 20:14:01&lt;/code&gt; and the time difference between the oplog last event(Wed Aug 04 2014 21:23:31 GMT+0530) of &lt;em&gt;PRIMARY&lt;/em&gt; node is more than 56.28 hours and so this &lt;em&gt;SECONDARY&lt;/em&gt; cannot catchup with the &lt;em&gt;PRIMARY&lt;/em&gt; node.&lt;/p&gt;
+
+&lt;p&gt;You can also confirm this by grep-ing for “RS102” in your mongodb logs of SECONDARY node. If the time gap between the last event of &lt;em&gt;PRIMARY&lt;/em&gt; and &lt;em&gt;SECONDARY&lt;/em&gt; is less the current oplog time(56.28hrs) of &lt;em&gt;PRIMARY&lt;/em&gt; node, the SECONDARY node may catchup with your &lt;em&gt;PRIMARY&lt;/em&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;What If the time difference between them is more than the current oplog time? - All you need to do is, empty your data directory on the secondary node and restart the &lt;code&gt;monogd&lt;/code&gt; service to trigger a initial sync. However this will impact the &lt;em&gt;PRIMARY&lt;/em&gt; node’s Performance and may take more time depending on the amount of data to sync. So, it is recommended to do this sync-ing during the times which your &lt;em&gt;PRIMARY&lt;/em&gt; node is handling low traffic.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You can also manually copy the data from any of the other &lt;em&gt;SECONDARY&lt;/em&gt; nodes and start the mongod process. However you have to make sure the data files are sufficiently recent to allow the &lt;em&gt;RECOVERING&lt;/em&gt; member to catch up with the oplog.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Say NO to running `git status` and `git branch`</title>
+      <link>http://blog.ravitezu.me/2014/04/14/git-status-and-branch-name/</link>
+      <pubDate>Mon, 14 Apr 2014 16:20:02 +0530</pubDate>
+      
+      <guid>http://blog.ravitezu.me/2014/04/14/git-status-and-branch-name/</guid>
+      <description>&lt;p&gt;Get the output of &lt;code&gt;git status&lt;/code&gt; and &lt;code&gt;git branch&lt;/code&gt; at your command prompt.
+The following steps will help you, to set this up on your machine.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;On OS X:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Make sure you have &lt;code&gt;git&lt;/code&gt; installed on your MAC machine or download it from &lt;a href=&#34;https://git-scm.com/download/mac&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Download the files (&lt;a href=&#34;https://raw.githubusercontent.com/RaviTezu/git-prompt/master/git-prompt.sh&#34;&gt;&lt;code&gt;git-prompt.sh&lt;/code&gt;&lt;/a&gt; and &lt;a href=&#34;https://raw.githubusercontent.com/RaviTezu/git-prompt/master/git-completion.bash&#34;&gt;&lt;code&gt;git-completion.bash&lt;/code&gt;&lt;/a&gt;) to your home directory.&lt;/li&gt;
+&lt;li&gt;Now append the following content to your &lt;code&gt;~/.bash_profile&lt;/code&gt; file.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;source ~/.git-prompt.sh
+source ~/.git-completion.bash
+export GIT_PS1_SHOWUPSTREAM=auto
+export GIT_PS1_SHOWCOLORHINTS=yes
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export PS1=&#39;[\u@\h \w\[\033[01;32m\]$(__git_ps1)\[\033[00m\]]\$ &#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;On Ubuntu:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;You should be having &lt;code&gt;/etc/bash_completion.d/git-prompt&lt;/code&gt; file, if you have &lt;code&gt;git&lt;/code&gt; installed on your machine.&lt;/li&gt;
+&lt;li&gt;Now create a file &lt;code&gt;.bash_aliases&lt;/code&gt; in your home directory with the following content.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;os=`uname -s`
+
+if [[ $os == &amp;quot;Linux&amp;quot; ]]; then
+    git_completion=&amp;quot;/etc/bash_completion.d/git-prompt&amp;quot;
+else
+    unset git_completion
+fi
+
+if [[ &amp;quot;$git_completion&amp;quot; ]]; then
+    if [ -f $git_completion ]; then
+           export GIT_PS1_SHOWDIRTYSTATE=true
+           export GIT_PS1_SHOWUNTRACKEDFILES=true
+           export GIT_PS1_SHOWSTASHSTATE=true          
+           PS1=&amp;quot;$PS1\$(__git_ps1 &#39;[\[\e[31;1m\]%s\[\e[0m\]] &#39;)&amp;quot;
+    fi
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;On CentOS/Fedora/RedHat:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;You should be having &lt;code&gt;/etc/bash_completion.d/git&lt;/code&gt; file, if you have git installed on your machine.&lt;/li&gt;
+&lt;li&gt;Now you have to append the same content(as above) in your &lt;code&gt;/etc/bashrc&lt;/code&gt; file.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;os=`uname -s`
+
+if [[ $os == &amp;quot;Linux&amp;quot; ]]; then
+    git_completion=&amp;quot;/etc/bash_completion.d/git-prompt&amp;quot;
+else
+    unset git_completion
+fi
+
+if [[ &amp;quot;$git_completion&amp;quot; ]]; then
+    if [ -f $git_completion ]; then
+           export GIT_PS1_SHOWDIRTYSTATE=true
+           export GIT_PS1_SHOWUNTRACKEDFILES=true
+           export GIT_PS1_SHOWSTASHSTATE=true
+           PS1=&amp;quot;$PS1\$(__git_ps1 &#39;[\[\e[31;1m\]%s\[\e[0m\]] &#39;)&amp;quot;
+    fi
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Source the modified/added files or open a new terminal to see the Magic.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What&amp;rsquo;s the Magic?:&lt;/strong&gt;
+&lt;a href=&#34;https://asciinema.org/a/86150/?autoplay=1&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/86150.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;More details:&lt;/strong&gt;&lt;br/&gt;
+You will see different symbol at the prompt for each status of your git repository.
+For example:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;=&lt;/code&gt; - When your local branch is even with the remote branch.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%&lt;/code&gt; - When you have some new/untracked files in your git repository.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;gt;&lt;/code&gt; - When your local branch is ahead of your remote branch.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;branch-name&amp;gt;&lt;/code&gt; - You will always see the &lt;code&gt;branch&lt;/code&gt; name.&lt;/li&gt;
+&lt;li&gt;&amp;hellip; and more.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t like the prompt colors, you can change this by modifing the scripts or the PS1 environment variable.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Say NO to running `git status` and `git branch` &middot; RaviTezu</title>
+        <meta name="description" content="Engineer • Hacker • Optimist • Runner • Gopher">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.16" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://blog.ravitezu.mecss/normalize.css">
+        <link rel="stylesheet" href="http://blog.ravitezu.mecss/highlight.css">
+        <link rel="stylesheet" href="http://blog.ravitezu.mecss/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84283793-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="RaviTezu | Blog" href="http://blog.ravitezu.me">RaviTezu | Blog</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://blog.ravitezu.meindex.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/RaviTezu">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/ravitezu">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" title="Stack Overflow" href="http://stackoverflow.com/users/1280320/ravitezu">
+                                <i class="fa fa-stack-overflow"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://in.linkedin.com/pub/raviteja-pothana/46/772/354">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Blog" href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Projects" href="/project/">Projects</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Contact" href="/page/contact/">Contact</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="/page/about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Say NO to running `git status` and `git branch`</h1>
+    
+    <p class="post-date">
+        <span>Published <time datetime="2014-04-14" itemprop="datePublished">Mon, Apr 14, 2014</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+            <span itemprop="name">
+                <a href="https://twitter/ravitezu" itemprop="url" rel="author">RaviTezu</a>
+            </span>
+        </span>
+    </p>
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>Get the output of <code>git status</code> and <code>git branch</code> at your command prompt.
+The following steps will help you, to set this up on your machine.</p>
+
+<p><strong>On OS X:</strong></p>
+
+<ol>
+<li>Make sure you have <code>git</code> installed on your MAC machine or download it from <a href="https://git-scm.com/download/mac">here</a></li>
+<li>Download the files (<a href="https://raw.githubusercontent.com/RaviTezu/git-prompt/master/git-prompt.sh"><code>git-prompt.sh</code></a> and <a href="https://raw.githubusercontent.com/RaviTezu/git-prompt/master/git-completion.bash"><code>git-completion.bash</code></a>) to your home directory.</li>
+<li>Now append the following content to your <code>~/.bash_profile</code> file.</li>
+</ol>
+
+<pre><code class="language-bash">source ~/.git-prompt.sh
+source ~/.git-completion.bash
+export GIT_PS1_SHOWUPSTREAM=auto
+export GIT_PS1_SHOWCOLORHINTS=yes
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export PS1='[\u@\h \w\[\033[01;32m\]$(__git_ps1)\[\033[00m\]]\$ '
+</code></pre>
+
+<p><strong>On Ubuntu:</strong></p>
+
+<ol>
+<li>You should be having <code>/etc/bash_completion.d/git-prompt</code> file, if you have <code>git</code> installed on your machine.</li>
+<li>Now create a file <code>.bash_aliases</code> in your home directory with the following content.</li>
+</ol>
+
+<pre><code class="language-bash">os=`uname -s`
+
+if [[ $os == &quot;Linux&quot; ]]; then
+    git_completion=&quot;/etc/bash_completion.d/git-prompt&quot;
+else
+    unset git_completion
+fi
+
+if [[ &quot;$git_completion&quot; ]]; then
+    if [ -f $git_completion ]; then
+           export GIT_PS1_SHOWDIRTYSTATE=true
+           export GIT_PS1_SHOWUNTRACKEDFILES=true
+           export GIT_PS1_SHOWSTASHSTATE=true          
+           PS1=&quot;$PS1\$(__git_ps1 '[\[\e[31;1m\]%s\[\e[0m\]] ')&quot;
+    fi
+fi
+</code></pre>
+
+<p><strong>On CentOS/Fedora/RedHat:</strong></p>
+
+<ol>
+<li>You should be having <code>/etc/bash_completion.d/git</code> file, if you have git installed on your machine.</li>
+<li>Now you have to append the same content(as above) in your <code>/etc/bashrc</code> file.</li>
+</ol>
+
+<pre><code class="language-bash">os=`uname -s`
+
+if [[ $os == &quot;Linux&quot; ]]; then
+    git_completion=&quot;/etc/bash_completion.d/git-prompt&quot;
+else
+    unset git_completion
+fi
+
+if [[ &quot;$git_completion&quot; ]]; then
+    if [ -f $git_completion ]; then
+           export GIT_PS1_SHOWDIRTYSTATE=true
+           export GIT_PS1_SHOWUNTRACKEDFILES=true
+           export GIT_PS1_SHOWSTASHSTATE=true
+           PS1=&quot;$PS1\$(__git_ps1 '[\[\e[31;1m\]%s\[\e[0m\]] ')&quot;
+    fi
+fi
+</code></pre>
+
+<p>Source the modified/added files or open a new terminal to see the Magic.</p>
+
+<p><strong>What&rsquo;s the Magic?:</strong>
+<a href="https://asciinema.org/a/86150/?autoplay=1"><img src="https://asciinema.org/a/86150.png" alt="asciicast" /></a></p>
+
+<p><strong>More details:</strong><br/>
+You will see different symbol at the prompt for each status of your git repository.
+For example:</p>
+
+<ul>
+<li><code>=</code> - When your local branch is even with the remote branch.</li>
+<li><code>%</code> - When you have some new/untracked files in your git repository.</li>
+<li><code>&gt;</code> - When your local branch is ahead of your remote branch.</li>
+<li><code>&lt;branch-name&gt;</code> - You will always see the <code>branch</code> name.</li>
+<li>&hellip; and more.</li>
+</ul>
+
+<p>If you don&rsquo;t like the prompt colors, you can change this by modifing the scripts or the PS1 environment variable.</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+
+    <div class="share">
+        <a class="icon-twitter" href="http://twitter.com/share?text=Say%20NO%20to%20running%20%60git%20status%60%20and%20%60git%20branch%60&url=http%3a%2f%2fblog.ravitezu.me%2f2014%2f04%2f14%2fgit-status-and-branch-name%2f"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+            <i class="fa fa-twitter"></i>
+            <span class="hidden">Twitter</span>
+        </a>
+
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fblog.ravitezu.me%2f2014%2f04%2f14%2fgit-status-and-branch-name%2f"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+            <i class="fa fa-facebook"></i>
+            <span class="hidden">Facebook</span>
+        </a>
+
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fblog.ravitezu.me%2f2014%2f04%2f14%2fgit-status-and-branch-name%2f"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+           <i class="fa fa-google-plus"></i>
+            <span class="hidden">Google+</span>
+        </a>
+    </div>
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'blog-ravitezu-me';
+    var disqus_identifier = 'http:\/\/blog.ravitezu.me\/2014\/04\/14\/git-status-and-branch-name\/';
+    var disqus_title = 'Say NO to running `git status` and `git branch`';
+    var disqus_url = 'http:\/\/blog.ravitezu.me\/2014\/04\/14\/git-status-and-branch-name\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="RaviTezu | Blog" href="http://blog.ravitezu.me">RaviTezu | Blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; Ravi Teja Pothana / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                </p>
+                
+            </div>
+        </footer>
+
+        <script src="http://blog.ravitezu.mejs/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+        <script src="http://blog.ravitezu.mejs/jquery.fitvids.js"></script>
+        <script src="http://blog.ravitezu.mejs/scripts.js"></script>
+    </body>
+</html>
+
