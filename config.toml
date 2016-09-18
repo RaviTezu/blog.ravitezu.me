@@ -1,5 +1,5 @@
 # Site settings
-baseurl = "http://blog.ravitezu.me" #without ending slash
+baseurl = "http://blog.ravitezu.me/" #without ending slash
 languageCode = "en-us"
 theme = "ghostwriter"
 title = "RaviTezu | Blog"
