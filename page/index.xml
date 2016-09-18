@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on RaviTezu | Blog</title>
+    <link>http://blog.ravitezu.me/page/</link>
+    <description>Recent content in Pages on RaviTezu | Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ravi Teja Pothana</copyright>
+    <lastBuildDate>Sun, 18 Sep 2016 21:02:30 +0530</lastBuildDate>
+    <atom:link href="http://blog.ravitezu.me/page/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>contact</title>
+      <link>http://blog.ravitezu.me/page/contact/</link>
+      <pubDate>Sun, 18 Sep 2016 21:02:30 +0530</pubDate>
+      
+      <guid>http://blog.ravitezu.me/page/contact/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>about</title>
+      <link>http://blog.ravitezu.me/page/about/</link>
+      <pubDate>Sun, 18 Sep 2016 21:02:20 +0530</pubDate>
+      
+      <guid>http://blog.ravitezu.me/page/about/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
