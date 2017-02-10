@@ -16,11 +16,11 @@
       <pubDate>Tue, 15 Nov 2016 22:03:17 +0530</pubDate>
       
       <guid>http://blog.ravitezu.me/2016/11/15/install-golang-on-ubuntu-or-mac/</guid>
-      <description>&lt;p&gt;I have been using GoLang for a while and wrote this simple bash script which can help with install the GoLang on your Mac or Linux machine and also, setting up the environmental variables for you.&lt;/p&gt;
+      <description>&lt;p&gt;I have been using GoLang for a while and wrote this simple bash script which can help with installing GoLang on your Mac or Linux machine and also, setting up the environmental variables for you.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Note: Tested on Mac OS X and Ubuntu.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: This script is tested on Mac OS X and Ubuntu.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;This script will try to install a particular version if povided to the script via &lt;code&gt;-v&lt;/code&gt; flag or else, it will try to install Go 1.7.3 (which is the stable version as of writing this script).
+&lt;p&gt;This script will try to install a particular version, if povided to  it via the &lt;code&gt;-v&lt;/code&gt; flag or else, it will try to install Go 1.7.3 (which is the stable version as of writing this script).
 The example in the &lt;em&gt;Installing Demo&lt;/em&gt; section shows you how to install golang 1.7.5 on ubuntu.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
