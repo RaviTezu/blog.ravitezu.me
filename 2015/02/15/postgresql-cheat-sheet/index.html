@@ -7,7 +7,7 @@
         <meta name="description" content="Engineer • Hacker • Optimist • Runner • Gopher">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.16" />
+        <meta name="generator" content="Hugo 0.17-DEV" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="http://blog.ravitezu.me/css/normalize.css">
@@ -106,7 +106,7 @@ ga('send', 'pageview');
         <div class="post-content clearfix" itemprop="articleBody">
     
 
-    <p>This article mainly focuses on the Ownership/Permissions of database objects. I had to collect these for migrating a standalone PostgreSQL database to <a href="http://aws.amazon.com/rds/">Amazon RDS</a>(Relational Database Service) PostgreSQL and I will be updating this article as long as I find something which belongs here. <br/>
+    <p>This article mainly focuses on the Ownership/Permissions of database objects. I had to collect these details for migrating a standalone PostgreSQL database to <a href="http://aws.amazon.com/rds/">Amazon RDS</a>(Relational Database Service) PostgreSQL and I will be updating this article as long as I find something which belongs here. <br/>
 All these commands are supposed to be executed in the <code>psql</code> command line. Adding “+” sign to most of the command gives you more information of those objects.</p>
 
 <ul>
@@ -279,6 +279,19 @@ GRANT ALL ON ALL TABLES IN SCHEMA application TO app_user;
 </div>
 
         <footer class="post-footer clearfix">
+    
+        <p class="post-tags">
+            <span>Tagged:</span>
+            
+                 <a href="/tags/aws/">AWS</a>
+            
+                 <a href="/tags/rds/">RDS</a>
+            
+                 <a href="/tags/postgresql/">PostgreSQL</a>
+            
+                 <a href="/tags/psql/">PSQL</a>
+            
+        </p>
     
 
     <div class="share">

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RaviTezu | Blog</title>
+    <link>http://blog.ravitezu.me/tags/mongodb/index.xml</link>
+    <description>Recent content on RaviTezu | Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ravi Teja Pothana</copyright>
+    <atom:link href="http://blog.ravitezu.me/tags/mongodb/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Fixing a recovering(forever?) Secondary mongodb node</title>
+      <link>http://blog.ravitezu.me/2014/08/04/fix-a-recovering-mongodb-node/</link>
+      <pubDate>Mon, 04 Aug 2014 17:54:35 +0530</pubDate>
+      
+      <guid>http://blog.ravitezu.me/2014/08/04/fix-a-recovering-mongodb-node/</guid>
+      <description>&lt;p&gt;I have recently came across a Secondary MongoDB Node in one of our mongodb clusters to be in &lt;em&gt;RECOVERING&lt;/em&gt; state for more than 5 days and this Article will help you in figuring out whether the node will be back to Normal state or not.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Steps:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;SSH into the &lt;em&gt;PRIMARY&lt;/em&gt; MongoDB node of the cluster and open its Mongo Shell:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ravitezu@mongo_pri:~ $ mongo MongoDB 
+shell version: 2.4.4 connecting to: test 
+rs1:PRIMARY&amp;gt; use blogdb switched to db blogdb
+
+rs1:PRIMARY&amp;gt; db.printReplicationInfo() 
+configured oplog size: 2048MB log length start to end: 202615secs (56.28hrs) 
+oplog first event time: Mon Aug 02 2014 13:06:36 GMT+0530 (IST) 
+oplog last event time: Wed Aug 04 2014 21:23:31 GMT+0530 (IST) 
+now: Wed Aug 04 2014 21:23:33 GMT+0530 (IST)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So, OPLOG on PRIMARY node is rotated every 56.28 hrs.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Now SSH into the &lt;em&gt;SECONDARY&lt;/em&gt; node which is in &lt;em&gt;RECEOVERING&lt;/em&gt; state and open its Mongo Shell:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ravitezu@mongo_sec:~ $ mongo MongoDB 
+rs1:RECOVERING&amp;gt; use blogdb 
+switched to db blogdb 
+rs1:RECOVERING&amp;gt; db.printReplicationInfo() 
+configured oplog size: 2048MB log length start to end: 602532secs (167.37hrs)
+oplog first event time: Mon Jul 21 2014 20:51:49 GMT+0530 (IST)
+oplog last event time: Mon Jul 28 2014 20:14:01 GMT+0530 (IST)
+now: Mon Aug 04 2014 21:24:38 GMT+0530 (IST) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here, the last event on this &lt;em&gt;SECONDARY&lt;/em&gt; node happened at &lt;code&gt;Mon Jul 28 2014 20:14:01&lt;/code&gt; and the time difference between the oplog last event(Wed Aug 04 2014 21:23:31 GMT+0530) of &lt;em&gt;PRIMARY&lt;/em&gt; node is more than 56.28 hours and so this &lt;em&gt;SECONDARY&lt;/em&gt; cannot catchup with the &lt;em&gt;PRIMARY&lt;/em&gt; node.&lt;/p&gt;
+
+&lt;p&gt;You can also confirm this by grep-ing for “RS102” in your mongodb logs of SECONDARY node. If the time gap between the last event of &lt;em&gt;PRIMARY&lt;/em&gt; and &lt;em&gt;SECONDARY&lt;/em&gt; is less the current oplog time(56.28hrs) of &lt;em&gt;PRIMARY&lt;/em&gt; node, the SECONDARY node may catchup with your &lt;em&gt;PRIMARY&lt;/em&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;What If the time difference between them is more than the current oplog time? - All you need to do is, empty your data directory on the secondary node and restart the &lt;code&gt;monogd&lt;/code&gt; service to trigger a initial sync. However this will impact the &lt;em&gt;PRIMARY&lt;/em&gt; node’s Performance and may take more time depending on the amount of data to sync. So, it is recommended to do this sync-ing during the times which your &lt;em&gt;PRIMARY&lt;/em&gt; node is handling low traffic.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You can also manually copy the data from any of the other &lt;em&gt;SECONDARY&lt;/em&gt; nodes and start the mongod process. However you have to make sure the data files are sufficiently recent to allow the &lt;em&gt;RECOVERING&lt;/em&gt; member to catch up with the oplog.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

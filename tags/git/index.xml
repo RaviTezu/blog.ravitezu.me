@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RaviTezu | Blog</title>
+    <link>http://blog.ravitezu.me/tags/git/index.xml</link>
+    <description>Recent content on RaviTezu | Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ravi Teja Pothana</copyright>
+    <atom:link href="http://blog.ravitezu.me/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Say NO to running `git status` and `git branch`</title>
+      <link>http://blog.ravitezu.me/2014/04/14/git-status-and-branch-name/</link>
+      <pubDate>Mon, 14 Apr 2014 16:20:02 +0530</pubDate>
+      
+      <guid>http://blog.ravitezu.me/2014/04/14/git-status-and-branch-name/</guid>
+      <description>&lt;p&gt;Get the output of &lt;code&gt;git status&lt;/code&gt; and &lt;code&gt;git branch&lt;/code&gt; at your bash command prompt.
+The following steps will help you, to set this up on your machine.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;On OS X:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Make sure you have &lt;code&gt;git&lt;/code&gt; installed on your MAC machine or download it from &lt;a href=&#34;https://git-scm.com/download/mac&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Download the files (&lt;a href=&#34;https://raw.githubusercontent.com/RaviTezu/git-prompt/master/git-prompt.sh&#34;&gt;&lt;code&gt;git-prompt.sh&lt;/code&gt;&lt;/a&gt; and &lt;a href=&#34;https://raw.githubusercontent.com/RaviTezu/git-prompt/master/git-completion.bash&#34;&gt;&lt;code&gt;git-completion.bash&lt;/code&gt;&lt;/a&gt;) to your home directory.&lt;/li&gt;
+&lt;li&gt;Now append the following content to your &lt;code&gt;~/.bash_profile&lt;/code&gt; file.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;source ~/.git-prompt.sh
+source ~/.git-completion.bash
+export GIT_PS1_SHOWUPSTREAM=auto
+export GIT_PS1_SHOWCOLORHINTS=yes
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export PS1=&#39;[\u@\h \w\[\033[01;32m\]$(__git_ps1)\[\033[00m\]]\$ &#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;On Ubuntu:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;You should be having &lt;code&gt;/etc/bash_completion.d/git-prompt&lt;/code&gt; file, if you have &lt;code&gt;git&lt;/code&gt; installed on your machine.&lt;/li&gt;
+&lt;li&gt;Now create a file &lt;code&gt;.bash_aliases&lt;/code&gt; in your home directory with the following content.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;os=`uname -s`
+
+if [[ $os == &amp;quot;Linux&amp;quot; ]]; then
+    git_completion=&amp;quot;/etc/bash_completion.d/git-prompt&amp;quot;
+else
+    unset git_completion
+fi
+
+if [[ &amp;quot;$git_completion&amp;quot; ]]; then
+    if [ -f $git_completion ]; then
+           export GIT_PS1_SHOWDIRTYSTATE=true
+           export GIT_PS1_SHOWUNTRACKEDFILES=true
+           export GIT_PS1_SHOWSTASHSTATE=true          
+           PS1=&amp;quot;$PS1\$(__git_ps1 &#39;[\[\e[31;1m\]%s\[\e[0m\]] &#39;)&amp;quot;
+    fi
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;On CentOS/Fedora/RedHat:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;You should be having &lt;code&gt;/etc/bash_completion.d/git&lt;/code&gt; file, if you have git installed on your machine.&lt;/li&gt;
+&lt;li&gt;Now you have to append the same content(as above) in your &lt;code&gt;/etc/bashrc&lt;/code&gt; file.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;os=`uname -s`
+
+if [[ $os == &amp;quot;Linux&amp;quot; ]]; then
+    git_completion=&amp;quot;/etc/bash_completion.d/git-prompt&amp;quot;
+else
+    unset git_completion
+fi
+
+if [[ &amp;quot;$git_completion&amp;quot; ]]; then
+    if [ -f $git_completion ]; then
+           export GIT_PS1_SHOWDIRTYSTATE=true
+           export GIT_PS1_SHOWUNTRACKEDFILES=true
+           export GIT_PS1_SHOWSTASHSTATE=true
+           PS1=&amp;quot;$PS1\$(__git_ps1 &#39;[\[\e[31;1m\]%s\[\e[0m\]] &#39;)&amp;quot;
+    fi
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Source the modified/added files or open a new terminal to see the Magic.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What&amp;rsquo;s the Magic?:&lt;/strong&gt;
+&lt;a href=&#34;https://asciinema.org/a/86150/?autoplay=1&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/86150.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;More details:&lt;/strong&gt;&lt;br/&gt;
+You will see different symbol at the prompt for each status of your git repository.
+For example:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;=&lt;/code&gt; - When your local branch is even with the remote branch.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%&lt;/code&gt; - When you have some new/untracked files in your git repository.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;gt;&lt;/code&gt; - When your local branch is ahead of your remote branch.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;branch-name&amp;gt;&lt;/code&gt; - You will always see the &lt;code&gt;branch&lt;/code&gt; name.&lt;/li&gt;
+&lt;li&gt;&amp;hellip; and more.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t like the prompt colors, you can change this by modifing the scripts or the PS1 environment variable.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

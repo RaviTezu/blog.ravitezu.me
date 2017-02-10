@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RaviTezu | Blog</title>
+    <link>http://blog.ravitezu.me/tags/linux/index.xml</link>
+    <description>Recent content on RaviTezu | Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ravi Teja Pothana</copyright>
+    <atom:link href="http://blog.ravitezu.me/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Install golang on Mac OS X and Linux</title>
+      <link>http://blog.ravitezu.me/2016/11/15/install-golang-on-ubuntu-or-mac/</link>
+      <pubDate>Tue, 15 Nov 2016 22:03:17 +0530</pubDate>
+      
+      <guid>http://blog.ravitezu.me/2016/11/15/install-golang-on-ubuntu-or-mac/</guid>
+      <description>&lt;p&gt;I have been using GoLang for a while and wrote this simple bash script which can help with install the GoLang on your Mac or Linux machine and also, setting up the environmental variables for you.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: Tested on Mac OS X and Ubuntu.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;This script will try to install a particular version if povided to the script via &lt;code&gt;-v&lt;/code&gt; flag or else, it will try to install Go 1.7.3 (which is the stable version as of this writing script) and also, feel free to reach out to me &lt;a href=&#34;https://twitter.com/RaviTezu&#34;&gt;@RaviTezu&lt;/a&gt; if you need any help.
+The example in the &lt;em&gt;Installing Demo&lt;/em&gt; section shows you how to install golang 1.7.5 on ubuntu.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+#!/usr/bin/env bash
+set -e 
+
+# Author: Ravi Teja Pothana (@RaviTezu)
+# Date: Nov 15, 2016
+
+# The MIT License (MIT)
+
+# Copyright (c) 2016 RaviTezu
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &amp;quot;Software&amp;quot;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED &amp;quot;AS IS&amp;quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+GO_VERSION=&amp;quot;1.7.3&amp;quot;
+OS=`uname -s`
+HOME_DIR=$HOME
+GO_HOME=$HOME_DIR/go
+GO_ROOT=/usr/local/go
+ARCH=`uname -m`
+
+function usage {
+    printf &amp;quot;$0 -v &amp;lt;version&amp;gt; \n&amp;quot;
+    printf &amp;quot;Example: $0 -v 1.7.3 \n&amp;quot;
+    exit 1
+}
+
+while getopts &amp;quot;:v:&amp;quot; opt; do
+  case $opt in
+    v) GO_VERSION=&amp;quot;$OPTARG&amp;quot;
+    ;;
+    \?) echo &amp;quot;Invalid option -$OPTARG&amp;quot; &amp;gt;&amp;amp;2
+    echo 
+    usage
+    ;;
+  esac
+done 
+
+# Function to install golang and setup the env.
+function install {
+    echo
+    echo &amp;quot;...... [ Scanning ]&amp;quot;
+    # Check if there&#39;s any older version of GO installed on the machine. 
+    if [ -d /usr/local/go ]; then 
+        echo &amp;quot;...... [ Found an older version of GO ]&amp;quot;
+        printf &amp;quot;Would you like to remove it? [y/N]: &amp;quot;
+        read ans
+        case &amp;quot;$ans&amp;quot; in 
+            &amp;quot;y&amp;quot;|&amp;quot;yes&amp;quot;|&amp;quot;Y&amp;quot;|&amp;quot;Yes&amp;quot;|&amp;quot;YES&amp;quot;) sudo rm -rf /usr/loca/go;;
+            *) echo &amp;quot;...... [ Exiting ]&amp;quot;; exit 0;;
+        esac
+    fi
+    # If the operating system is 64-bit Linux
+    if [ &amp;quot;$OS&amp;quot; == &amp;quot;Linux&amp;quot; ] &amp;amp;&amp;amp; [ &amp;quot;$ARCH&amp;quot; == &amp;quot;x86_64&amp;quot; ]; then
+        PACKAGE=go$GO_VERSION.linux-amd64.tar.gz
+        pushd /tmp &amp;gt; /dev/null
+            echo
+            echo &amp;quot;...... [ Downloading ]&amp;quot;
+            wget https://storage.googleapis.com/golang/$PACKAGE
+            if [ $? -ne 0 ]; then 
+                echo &amp;quot;Failed to Download the package! Exiting.&amp;quot;
+                exit 1
+            fi
+            echo &amp;quot;...... [ Installing ]&amp;quot;
+            sudo tar -C /usr/local -xzf $PACKAGE
+            rm -rf $PACKAGE
+        popd &amp;gt; /dev/null
+        echo &amp;quot;...... [ Installed ]&amp;quot;
+        setup
+        echo &amp;quot;...... [ Open a new terminal tab to start using GO ]&amp;quot;
+        exit 0
+    fi
+
+    # If the operating system is 64-bit MacOS
+    if [ &amp;quot;$OS&amp;quot; == &amp;quot;Darwin&amp;quot; ] &amp;amp;&amp;amp; [ &amp;quot;$ARCH&amp;quot; == &amp;quot;x86_64&amp;quot; ]; then 
+        PACKAGE=go$GO_VERSION.darwin-amd64.pkg
+        pushd /tmp  &amp;gt; /dev/null
+            echo
+            echo &amp;quot;...... [ Downloading ]&amp;quot;
+            wget https://storage.googleapis.com/golang/$PACKAGE
+            if [ $? -ne 0 ]; then 
+                echo &amp;quot;Failed to Download the package! WTF!&amp;quot;
+                exit 1
+            fi
+            echo &amp;quot;...... [ Installing ]&amp;quot;
+            sudo /usr/sbin/installer -pkg $PACKAGE -target /
+            rm -rf $PACKAGE
+        popd &amp;gt; /dev/null
+        echo &amp;quot;...... [ Installed ]&amp;quot;
+        setup
+        echo &amp;quot;...... [ Open a new terminal tab to start using GO ]&amp;quot;
+        exit 0
+    fi
+
+    # Couldn&#39;t determine the machine arch or the operating system. So error out mate!&#39;
+    errorout
+}
+
+function setup {
+    # Create GOHOME and the required directories
+    if [ ! -d $GO_HOME ]; then
+        mkdir $GO_HOME
+        mkdir -p $GO_HOME/{src,pkg,bin}
+    else
+        mkdir -p $GO_HOME/{src,pkg,bin}
+    fi
+
+    if [ &amp;quot;$OS&amp;quot; == &amp;quot;Linux&amp;quot; ] &amp;amp;&amp;amp; [ &amp;quot;$ARCH&amp;quot; == &amp;quot;x86_64&amp;quot; ]; then
+        grep -q -F &#39;export GOPATH=$HOME/go&#39; $HOME/.bashrc || echo &#39;export GOPATH=$HOME/go&#39; &amp;gt;&amp;gt; $HOME/.bashrc
+        grep -q -F &#39;export GOROOT=/usr/local/go&#39; $HOME/.bashrc || echo &#39;export GOROOT=/usr/local/go&#39; &amp;gt;&amp;gt; $HOME/.bashrc
+        grep -q -F &#39;export PATH=$PATH:$GOROOT/bin&#39; $HOME/.bashrc || echo &#39;export PATH=$PATH:$GOROOT/bin&#39; &amp;gt;&amp;gt; $HOME/.bashrc
+        grep -q -F &#39;export PATH=$PATH:$GOPATH/bin&#39; $HOME/.bashrc || echo &#39;export PATH=$PATH:$GOPATH/bin&#39; &amp;gt;&amp;gt; $HOME/.bashrc  
+    fi
+
+    if [ &amp;quot;$OS&amp;quot; == &amp;quot;Darwin&amp;quot; ] &amp;amp;&amp;amp; [ &amp;quot;$ARCH&amp;quot; == &amp;quot;x86_64&amp;quot; ]; then
+        grep -q -F &#39;export GOPATH=$HOME/go&#39; $HOME/.bash_profile || echo &#39;export GOPATH=$HOME/go&#39; &amp;gt;&amp;gt; $HOME/.bash_profile
+        grep -q -F &#39;export GOROOT=/usr/local/go&#39; $HOME/.bash_profile || echo &#39;export GOROOT=/usr/local/go&#39; &amp;gt;&amp;gt; $HOME/.bash_profile
+        grep -q -F &#39;export PATH=$PATH:$GOROOT/bin&#39; $HOME/.bash_profile || echo &#39;export PATH=$PATH:$GOROOT/bin&#39; &amp;gt;&amp;gt; $HOME/.bash_profile
+        grep -q -F &#39;export PATH=$PATH:$GOPATH/bin&#39; $HOME/.bash_profile || echo &#39;export PATH=$PATH:$GOPATH/bin&#39; &amp;gt;&amp;gt; $HOME/.bash_profile
+    fi
+    echo
+    echo &amp;quot;...... [You&#39;re ready to Go :)]&amp;quot;
+}
+
+function errorout {
+    echo &amp;quot;Cannot determine your operating system or you ain&#39;t running a 64-bit machine.&amp;quot;
+    echo &amp;quot;You are on 64-bit Linux/MacOS and this script is still failing? Write to @RaviTezu(Twitter)&amp;quot;
+    exit 1
+}
+
+echo &amp;quot;...... [ Welcome ]&amp;quot;
+install
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Installing Demo:&lt;/strong&gt;
+&lt;a href=&#34;https://asciinema.org/a/102748/?autoplay=1&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/102748.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Say NO to running `git status` and `git branch`</title>
+      <link>http://blog.ravitezu.me/2014/04/14/git-status-and-branch-name/</link>
+      <pubDate>Mon, 14 Apr 2014 16:20:02 +0530</pubDate>
+      
+      <guid>http://blog.ravitezu.me/2014/04/14/git-status-and-branch-name/</guid>
+      <description>&lt;p&gt;Get the output of &lt;code&gt;git status&lt;/code&gt; and &lt;code&gt;git branch&lt;/code&gt; at your bash command prompt.
+The following steps will help you, to set this up on your machine.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;On OS X:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Make sure you have &lt;code&gt;git&lt;/code&gt; installed on your MAC machine or download it from &lt;a href=&#34;https://git-scm.com/download/mac&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Download the files (&lt;a href=&#34;https://raw.githubusercontent.com/RaviTezu/git-prompt/master/git-prompt.sh&#34;&gt;&lt;code&gt;git-prompt.sh&lt;/code&gt;&lt;/a&gt; and &lt;a href=&#34;https://raw.githubusercontent.com/RaviTezu/git-prompt/master/git-completion.bash&#34;&gt;&lt;code&gt;git-completion.bash&lt;/code&gt;&lt;/a&gt;) to your home directory.&lt;/li&gt;
+&lt;li&gt;Now append the following content to your &lt;code&gt;~/.bash_profile&lt;/code&gt; file.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;source ~/.git-prompt.sh
+source ~/.git-completion.bash
+export GIT_PS1_SHOWUPSTREAM=auto
+export GIT_PS1_SHOWCOLORHINTS=yes
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export PS1=&#39;[\u@\h \w\[\033[01;32m\]$(__git_ps1)\[\033[00m\]]\$ &#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;On Ubuntu:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;You should be having &lt;code&gt;/etc/bash_completion.d/git-prompt&lt;/code&gt; file, if you have &lt;code&gt;git&lt;/code&gt; installed on your machine.&lt;/li&gt;
+&lt;li&gt;Now create a file &lt;code&gt;.bash_aliases&lt;/code&gt; in your home directory with the following content.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;os=`uname -s`
+
+if [[ $os == &amp;quot;Linux&amp;quot; ]]; then
+    git_completion=&amp;quot;/etc/bash_completion.d/git-prompt&amp;quot;
+else
+    unset git_completion
+fi
+
+if [[ &amp;quot;$git_completion&amp;quot; ]]; then
+    if [ -f $git_completion ]; then
+           export GIT_PS1_SHOWDIRTYSTATE=true
+           export GIT_PS1_SHOWUNTRACKEDFILES=true
+           export GIT_PS1_SHOWSTASHSTATE=true          
+           PS1=&amp;quot;$PS1\$(__git_ps1 &#39;[\[\e[31;1m\]%s\[\e[0m\]] &#39;)&amp;quot;
+    fi
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;On CentOS/Fedora/RedHat:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;You should be having &lt;code&gt;/etc/bash_completion.d/git&lt;/code&gt; file, if you have git installed on your machine.&lt;/li&gt;
+&lt;li&gt;Now you have to append the same content(as above) in your &lt;code&gt;/etc/bashrc&lt;/code&gt; file.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;os=`uname -s`
+
+if [[ $os == &amp;quot;Linux&amp;quot; ]]; then
+    git_completion=&amp;quot;/etc/bash_completion.d/git-prompt&amp;quot;
+else
+    unset git_completion
+fi
+
+if [[ &amp;quot;$git_completion&amp;quot; ]]; then
+    if [ -f $git_completion ]; then
+           export GIT_PS1_SHOWDIRTYSTATE=true
+           export GIT_PS1_SHOWUNTRACKEDFILES=true
+           export GIT_PS1_SHOWSTASHSTATE=true
+           PS1=&amp;quot;$PS1\$(__git_ps1 &#39;[\[\e[31;1m\]%s\[\e[0m\]] &#39;)&amp;quot;
+    fi
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Source the modified/added files or open a new terminal to see the Magic.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What&amp;rsquo;s the Magic?:&lt;/strong&gt;
+&lt;a href=&#34;https://asciinema.org/a/86150/?autoplay=1&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/86150.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;More details:&lt;/strong&gt;&lt;br/&gt;
+You will see different symbol at the prompt for each status of your git repository.
+For example:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;=&lt;/code&gt; - When your local branch is even with the remote branch.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%&lt;/code&gt; - When you have some new/untracked files in your git repository.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;gt;&lt;/code&gt; - When your local branch is ahead of your remote branch.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;branch-name&amp;gt;&lt;/code&gt; - You will always see the &lt;code&gt;branch&lt;/code&gt; name.&lt;/li&gt;
+&lt;li&gt;&amp;hellip; and more.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t like the prompt colors, you can change this by modifing the scripts or the PS1 environment variable.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

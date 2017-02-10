@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RaviTezu | Blog</title>
+    <link>http://blog.ravitezu.me/tags/psql/index.xml</link>
+    <description>Recent content on RaviTezu | Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ravi Teja Pothana</copyright>
+    <atom:link href="http://blog.ravitezu.me/tags/psql/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>PostgreSQL cheat sheet</title>
+      <link>http://blog.ravitezu.me/2015/02/15/postgresql-cheat-sheet/</link>
+      <pubDate>Sun, 15 Feb 2015 18:27:05 +0530</pubDate>
+      
+      <guid>http://blog.ravitezu.me/2015/02/15/postgresql-cheat-sheet/</guid>
+      <description>&lt;p&gt;This article mainly focuses on the Ownership/Permissions of database objects. I had to collect these details for migrating a standalone PostgreSQL database to &lt;a href=&#34;http://aws.amazon.com/rds/&#34;&gt;Amazon RDS&lt;/a&gt;(Relational Database Service) PostgreSQL and I will be updating this article as long as I find something which belongs here. &lt;br/&gt;
+All these commands are supposed to be executed in the &lt;code&gt;psql&lt;/code&gt; command line. Adding “+” sign to most of the command gives you more information of those objects.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;How to get help in psql command line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;\? 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list the databases:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\l or \l+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to connect to a different database with in the shell:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\c &amp;lt;database-name&amp;gt; or \connect &amp;lt;database-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all the schemas in a database:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\dn or \dn+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all tables in a schema:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\dt &amp;lt;schema-name&amp;gt;.* or \dt+ &amp;lt;schema-name&amp;gt;.*
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all tables in a database:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\dt *.* or \dt+ *.*
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all views in a schema:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\dv or \dv+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all views in a database:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\dv *.* or \dv+ *.*
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to know the permissions on tables and views:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\dp+ &amp;lt;schema-name&amp;gt;.*;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all the functions:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\df or \df+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all the sequences in all schemas:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\ds+ *.*;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to create a role in postgres:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;CREATE ROLE bob WITH PASSWORD &#39;bobpassword&#39;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to create a user in posrgres:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;CREATE USER alice WITH PASSWORD &#39;alicepassword&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; The keywords &lt;em&gt;ROLE&lt;/em&gt; and &lt;em&gt;USER&lt;/em&gt; are synonyms in PostgreSQL, however the difference between them is, when you use &lt;em&gt;USER&lt;/em&gt;, the role will be created with &lt;em&gt;LOGIN&lt;/em&gt; privileges.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to create a group in postgres:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;CREATE GROUP developers; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to create a schema in a database:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;CREATE SCHEMA minions AUTHORIZATION gru;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to grant SELECT privileges on all tables to a group:&lt;br/&gt;
+&lt;em&gt;Note: Before you grant SELECT privileges to a role/group you need to give USAGE privileges to that role on the schemas those tables are in.&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;GRANT USAGE ON SCHEMA application TO developers; 
+GRANT SELECT ON ALL TABLES IN SCHEMA application TO developers;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to add roles to a group:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;GRANT developers TO bob,alice; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to grant ALL permissions to a role on tables in a schema:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;GRANT ALL ON SCHEMA application TO developers;
+GRANT ALL ON ALL TABLES IN SCHEMA application TO app_user; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to know the current database:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT current_database();
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to know the current user:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT current_user;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all the functions in a schema with arguments it take:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT proname || &#39;(&#39; || pg_catalog.pg_get_function_identity_arguments(pr.oid) || &#39;)&#39;, n.nspname FROM pg_proc pr join pg_namespace n ON pr.pronamespace = n.oid WHERE n.nspname IN (&#39;&amp;lt;schema1&amp;gt;&#39;,&#39;&amp;lt;schema2&amp;gt;&#39;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to change the ownership on a function:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ALTER FUNCTION &amp;lt;schema-name, if-needed&amp;gt;.&amp;lt;function name with arguments, from the output of above query&amp;gt; OWNER TO &#39;new-owner&#39;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to grant EXECUTE permission on a function:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA application TO app_user;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to list all the functions in a schema along with the permissions on them:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT oid::regprocedure, proacl FROM pg_proc WHERE proacl IS NOT NULL;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to GRANT ALL permissions to sequences:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;GRANT ALL ON ALL SEQUENCES IN SCHEMA appplication to admin;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to change the search path for user:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ALTER ROLE app_user SET search_path TO application;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to show the default permissions on schema:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT nspname, defaclobjtype, defaclacl FROM pg_default_acl a JOIN pg_namespace b ON a.defaclnamespace=b.oid;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to set default permissions on a schema(on Tables):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ALTER DEFAULT PRIVILEGES IN SCHEMA application GRANT SELECT ON TABLES TO developers;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to revoke default permissions on a schema(on Tables):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ALTER DEFAULT PRIVILEGES IN SCHEMA application REVOKE ALL ON TABLES FROM developers;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to get the start time of the database from PSQL:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT pg_postmaster_start_time();
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to get the uptime, execute the query below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT now() - pg_postmaster_start_time();
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How to get long running queries:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;SELECT blockeda.pid AS blocked_pid, blockinga.pid AS blocking_pid, blockinga.query as blocking_query, blockeda.query as blocked_query FROM pg_catalog.pg_locks blockedl JOIN pg_stat_activity blockeda ON blockedl.pid = blockeda.pid JOIN pg_catalog.pg_locks blockingl ON(blockingl.transactionid=blockedl.transactionid AND blockedl.pid != blockingl.pid) JOIN pg_stat_activity blockinga ON blockingl.pid = blockinga.pid WHERE NOT blockedl.granted;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

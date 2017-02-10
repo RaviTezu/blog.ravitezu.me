@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Pages on RaviTezu | Blog</title>
-    <link>http://blog.ravitezu.me/page/</link>
-    <description>Recent content in Pages on RaviTezu | Blog</description>
+    <title>Page-rsses on RaviTezu | Blog</title>
+    <link>http://blog.ravitezu.me/page/index.xml</link>
+    <description>Recent content in Page-rsses on RaviTezu | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ravi Teja Pothana</copyright>

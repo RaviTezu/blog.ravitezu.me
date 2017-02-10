@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Install golang on Mac OS X and Linux &middot; RaviTezu</title>
+        <meta name="description" content="Engineer • Hacker • Optimist • Runner • Gopher">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.17-DEV" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://blog.ravitezu.me/css/normalize.css">
+        <link rel="stylesheet" href="http://blog.ravitezu.me/css/highlight.css">
+        <link rel="stylesheet" href="http://blog.ravitezu.me/css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84283793-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="RaviTezu | Blog" href="http://blog.ravitezu.me/">RaviTezu | Blog</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://blog.ravitezu.me/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/RaviTezu">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/ravitezu">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" title="Stack Overflow" href="http://stackoverflow.com/users/1280320/ravitezu">
+                                <i class="fa fa-stack-overflow"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://in.linkedin.com/pub/raviteja-pothana/46/772/354">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Blog" href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Projects" href="/project/">Projects</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Contact" href="/page/contact/">Contact</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="/page/about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Install golang on Mac OS X and Linux</h1>
+    
+    <p class="post-date">
+        <span>Published <time datetime="2016-11-15" itemprop="datePublished">Tue, Nov 15, 2016</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+            <span itemprop="name">
+                <a href="https://twitter/ravitezu" itemprop="url" rel="author">RaviTezu</a>
+            </span>
+        </span>
+    </p>
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>I have been using GoLang for a while and wrote this simple bash script which can help with install the GoLang on your Mac or Linux machine and also, setting up the environmental variables for you.</p>
+
+<p><em>Note: Tested on Mac OS X and Ubuntu.</em></p>
+
+<p>This script will try to install a particular version if povided to the script via <code>-v</code> flag or else, it will try to install Go 1.7.3 (which is the stable version as of this writing script) and also, feel free to reach out to me <a href="https://twitter.com/RaviTezu">@RaviTezu</a> if you need any help.
+The example in the <em>Installing Demo</em> section shows you how to install golang 1.7.5 on ubuntu.</p>
+
+<pre><code class="language-bash">
+#!/usr/bin/env bash
+set -e 
+
+# Author: Ravi Teja Pothana (@RaviTezu)
+# Date: Nov 15, 2016
+
+# The MIT License (MIT)
+
+# Copyright (c) 2016 RaviTezu
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the &quot;Software&quot;), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+GO_VERSION=&quot;1.7.3&quot;
+OS=`uname -s`
+HOME_DIR=$HOME
+GO_HOME=$HOME_DIR/go
+GO_ROOT=/usr/local/go
+ARCH=`uname -m`
+
+function usage {
+    printf &quot;$0 -v &lt;version&gt; \n&quot;
+    printf &quot;Example: $0 -v 1.7.3 \n&quot;
+    exit 1
+}
+
+while getopts &quot;:v:&quot; opt; do
+  case $opt in
+    v) GO_VERSION=&quot;$OPTARG&quot;
+    ;;
+    \?) echo &quot;Invalid option -$OPTARG&quot; &gt;&amp;2
+    echo 
+    usage
+    ;;
+  esac
+done 
+
+# Function to install golang and setup the env.
+function install {
+    echo
+    echo &quot;...... [ Scanning ]&quot;
+    # Check if there's any older version of GO installed on the machine. 
+    if [ -d /usr/local/go ]; then 
+        echo &quot;...... [ Found an older version of GO ]&quot;
+        printf &quot;Would you like to remove it? [y/N]: &quot;
+        read ans
+        case &quot;$ans&quot; in 
+            &quot;y&quot;|&quot;yes&quot;|&quot;Y&quot;|&quot;Yes&quot;|&quot;YES&quot;) sudo rm -rf /usr/loca/go;;
+            *) echo &quot;...... [ Exiting ]&quot;; exit 0;;
+        esac
+    fi
+    # If the operating system is 64-bit Linux
+    if [ &quot;$OS&quot; == &quot;Linux&quot; ] &amp;&amp; [ &quot;$ARCH&quot; == &quot;x86_64&quot; ]; then
+        PACKAGE=go$GO_VERSION.linux-amd64.tar.gz
+        pushd /tmp &gt; /dev/null
+            echo
+            echo &quot;...... [ Downloading ]&quot;
+            wget https://storage.googleapis.com/golang/$PACKAGE
+            if [ $? -ne 0 ]; then 
+                echo &quot;Failed to Download the package! Exiting.&quot;
+                exit 1
+            fi
+            echo &quot;...... [ Installing ]&quot;
+            sudo tar -C /usr/local -xzf $PACKAGE
+            rm -rf $PACKAGE
+        popd &gt; /dev/null
+        echo &quot;...... [ Installed ]&quot;
+        setup
+        echo &quot;...... [ Open a new terminal tab to start using GO ]&quot;
+        exit 0
+    fi
+
+    # If the operating system is 64-bit MacOS
+    if [ &quot;$OS&quot; == &quot;Darwin&quot; ] &amp;&amp; [ &quot;$ARCH&quot; == &quot;x86_64&quot; ]; then 
+        PACKAGE=go$GO_VERSION.darwin-amd64.pkg
+        pushd /tmp  &gt; /dev/null
+            echo
+            echo &quot;...... [ Downloading ]&quot;
+            wget https://storage.googleapis.com/golang/$PACKAGE
+            if [ $? -ne 0 ]; then 
+                echo &quot;Failed to Download the package! WTF!&quot;
+                exit 1
+            fi
+            echo &quot;...... [ Installing ]&quot;
+            sudo /usr/sbin/installer -pkg $PACKAGE -target /
+            rm -rf $PACKAGE
+        popd &gt; /dev/null
+        echo &quot;...... [ Installed ]&quot;
+        setup
+        echo &quot;...... [ Open a new terminal tab to start using GO ]&quot;
+        exit 0
+    fi
+
+    # Couldn't determine the machine arch or the operating system. So error out mate!'
+    errorout
+}
+
+function setup {
+    # Create GOHOME and the required directories
+    if [ ! -d $GO_HOME ]; then
+        mkdir $GO_HOME
+        mkdir -p $GO_HOME/{src,pkg,bin}
+    else
+        mkdir -p $GO_HOME/{src,pkg,bin}
+    fi
+
+    if [ &quot;$OS&quot; == &quot;Linux&quot; ] &amp;&amp; [ &quot;$ARCH&quot; == &quot;x86_64&quot; ]; then
+        grep -q -F 'export GOPATH=$HOME/go' $HOME/.bashrc || echo 'export GOPATH=$HOME/go' &gt;&gt; $HOME/.bashrc
+        grep -q -F 'export GOROOT=/usr/local/go' $HOME/.bashrc || echo 'export GOROOT=/usr/local/go' &gt;&gt; $HOME/.bashrc
+        grep -q -F 'export PATH=$PATH:$GOROOT/bin' $HOME/.bashrc || echo 'export PATH=$PATH:$GOROOT/bin' &gt;&gt; $HOME/.bashrc
+        grep -q -F 'export PATH=$PATH:$GOPATH/bin' $HOME/.bashrc || echo 'export PATH=$PATH:$GOPATH/bin' &gt;&gt; $HOME/.bashrc  
+    fi
+
+    if [ &quot;$OS&quot; == &quot;Darwin&quot; ] &amp;&amp; [ &quot;$ARCH&quot; == &quot;x86_64&quot; ]; then
+        grep -q -F 'export GOPATH=$HOME/go' $HOME/.bash_profile || echo 'export GOPATH=$HOME/go' &gt;&gt; $HOME/.bash_profile
+        grep -q -F 'export GOROOT=/usr/local/go' $HOME/.bash_profile || echo 'export GOROOT=/usr/local/go' &gt;&gt; $HOME/.bash_profile
+        grep -q -F 'export PATH=$PATH:$GOROOT/bin' $HOME/.bash_profile || echo 'export PATH=$PATH:$GOROOT/bin' &gt;&gt; $HOME/.bash_profile
+        grep -q -F 'export PATH=$PATH:$GOPATH/bin' $HOME/.bash_profile || echo 'export PATH=$PATH:$GOPATH/bin' &gt;&gt; $HOME/.bash_profile
+    fi
+    echo
+    echo &quot;...... [You're ready to Go :)]&quot;
+}
+
+function errorout {
+    echo &quot;Cannot determine your operating system or you ain't running a 64-bit machine.&quot;
+    echo &quot;You are on 64-bit Linux/MacOS and this script is still failing? Write to @RaviTezu(Twitter)&quot;
+    exit 1
+}
+
+echo &quot;...... [ Welcome ]&quot;
+install
+
+</code></pre>
+
+<p><strong>Installing Demo:</strong>
+<a href="https://asciinema.org/a/102748/?autoplay=1"><img src="https://asciinema.org/a/102748.png" alt="asciicast" /></a></p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+        <p class="post-tags">
+            <span>Tagged:</span>
+            
+                 <a href="/tags/go/">Go</a>
+            
+                 <a href="/tags/bash/">bash</a>
+            
+                 <a href="/tags/mac-os-x/">Mac OS X</a>
+            
+                 <a href="/tags/linux/">Linux</a>
+            
+        </p>
+    
+
+    <div class="share">
+        <a class="icon-twitter" href="http://twitter.com/share?text=Install%20golang%20on%20Mac%20OS%20X%20and%20Linux&url=http%3a%2f%2fblog.ravitezu.me%2f2016%2f11%2f15%2finstall-golang-on-ubuntu-or-mac%2f"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+            <i class="fa fa-twitter"></i>
+            <span class="hidden">Twitter</span>
+        </a>
+
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fblog.ravitezu.me%2f2016%2f11%2f15%2finstall-golang-on-ubuntu-or-mac%2f"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+            <i class="fa fa-facebook"></i>
+            <span class="hidden">Facebook</span>
+        </a>
+
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fblog.ravitezu.me%2f2016%2f11%2f15%2finstall-golang-on-ubuntu-or-mac%2f"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+           <i class="fa fa-google-plus"></i>
+            <span class="hidden">Google+</span>
+        </a>
+    </div>
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'blog-ravitezu-me';
+    var disqus_identifier = 'http:\/\/blog.ravitezu.me\/2016\/11\/15\/install-golang-on-ubuntu-or-mac\/';
+    var disqus_title = 'Install golang on Mac OS X and Linux';
+    var disqus_url = 'http:\/\/blog.ravitezu.me\/2016\/11\/15\/install-golang-on-ubuntu-or-mac\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="RaviTezu | Blog" href="http://blog.ravitezu.me/">RaviTezu | Blog</a>
+                    </h1>
+                    
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; Ravi Teja Pothana / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                </p>
+                
+            </div>
+        </footer>
+
+        <script src="http://blog.ravitezu.me/js/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+        <script src="http://blog.ravitezu.me/js/jquery.fitvids.js"></script>
+        <script src="http://blog.ravitezu.me/js/scripts.js"></script>
+    </body>
+</html>
+
