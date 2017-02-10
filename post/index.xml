@@ -20,7 +20,7 @@
 
 &lt;p&gt;&lt;em&gt;Note: Tested on Mac OS X and Ubuntu.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;This script will try to install a particular version if povided to the script via &lt;code&gt;-v&lt;/code&gt; flag or else, it will try to install Go 1.7.3 (which is the stable version as of this writing script) and also, feel free to reach out to me &lt;a href=&#34;https://twitter.com/RaviTezu&#34;&gt;@RaviTezu&lt;/a&gt; if you need any help.
+&lt;p&gt;This script will try to install a particular version if povided to the script via &lt;code&gt;-v&lt;/code&gt; flag or else, it will try to install Go 1.7.3 (which is the stable version as of writing this script).
 The example in the &lt;em&gt;Installing Demo&lt;/em&gt; section shows you how to install golang 1.7.5 on ubuntu.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
