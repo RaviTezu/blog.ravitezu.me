@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RaviTezu | Blog</title>
+    <link>http://blog.ravitezu.me/tags/vscode/index.xml</link>
+    <description>Recent content on RaviTezu | Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Ravi Teja Pothana</copyright>
+    <atom:link href="http://blog.ravitezu.me/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Installing gofont on ubuntu and mac for vscode</title>
+      <link>http://blog.ravitezu.me/2017/02/11/installing-gofont-on-ubuntu-and-mac-for-vscode/</link>
+      <pubDate>Sat, 11 Feb 2017 23:15:01 +0530</pubDate>
+      
+      <guid>http://blog.ravitezu.me/2017/02/11/installing-gofont-on-ubuntu-and-mac-for-vscode/</guid>
+      <description>&lt;p&gt;You would probably know that, there&amp;rsquo;s a new font type called &lt;a href=&#34;https://blog.golang.org/go-fonts&#34;&gt;&amp;ldquo;gofont&amp;rdquo;&lt;/a&gt; specially designed for go programing and this post will show you, how to install &lt;em&gt;gofont&lt;/em&gt; on your Ubuntu or Mac OS X machine and then use it for writing go programs on &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;vscode&lt;/a&gt; (which is one of the good IDEs avaiable today for golang).&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the tweet about &lt;em&gt;gofont&lt;/em&gt; from official golang twitter account:&lt;/p&gt;
+
+&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;en&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Introducing a new type family called Go, designed specifically for Go programming: &lt;a href=&#34;https://t.co/ZlGg5EiB6o&#34;&gt;https://t.co/ZlGg5EiB6o&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/golang?src=hash&#34;&gt;#golang&lt;/a&gt; &lt;a href=&#34;https://t.co/jZN3OnURSI&#34;&gt;pic.twitter.com/jZN3OnURSI&lt;/a&gt;&lt;/p&gt;&amp;mdash; Go (@golang) &lt;a href=&#34;https://twitter.com/golang/status/799075990500614144&#34;&gt;November 17, 2016&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;Note: This post assumes that, you have &lt;em&gt;git&lt;/em&gt; and &lt;em&gt;vscode&lt;/em&gt; installed on your machine.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Installing &lt;em&gt;gofont&lt;/em&gt; on Ubuntu or any Linux machine:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Dowload the font files using git:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git clone https://go.googlesource.com/image
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use your file browser to open this path: (I am using nautilus here)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nautilus image/font/gofont/ttfs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Now double click on the tff files to preview the font and also to install the fonts you like.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;List of files inside the &lt;em&gt;ttfs&lt;/em&gt; folder:&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;total 1496
+-rw-rw-r-- 1 ravitezu ravitezu 138956 Feb 12 00:00 Go-Bold.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 141872 Feb 12 00:00 Go-Bold-Italic.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 142368 Feb 12 00:00 Go-Medium.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 146496 Feb 12 00:00 Go-Medium-Italic.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 138588 Feb 12 00:00 Go-Italic.ttf
+-rw-rw-r-- 1 ravitezu ravitezu   1913 Feb 12 00:00 README
+-rw-rw-r-- 1 ravitezu ravitezu 134988 Feb 12 00:00 Go-Regular.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 160760 Feb 12 00:00 Go-Mono.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 169824 Feb 12 00:00 Go-Mono-Italic.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 164936 Feb 12 00:00 Go-Mono-Bold.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 173600 Feb 12 00:00 Go-Mono-Bold-Italic.ttf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Each font has its own name (You can see the font name on the top of installer window which is opened when you double clcik on the ttf file) and I have installed &amp;ldquo;Go-Medium&amp;rdquo; (File: Go-Medium.ttf) on my machine. I am saying this because, you have to know the font name to use it on your vscode.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Installing &lt;em&gt;gofont&lt;/em&gt; on Mac OS X:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Dowload the font files using git:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git clone https://go.googlesource.com/image
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use your file browser to open this path:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;open image/font/gofont/ttfs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Now double click on the tff files to preview the font and also to install the fonts you like.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;List of files inside the &lt;em&gt;ttfs&lt;/em&gt; folder:&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;total 2992
+-rw-rw-r-- 1 ravitezu ravitezu 138956 Feb 12 00:00 Go-Bold.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 141872 Feb 12 00:00 Go-Bold-Italic.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 142368 Feb 12 00:00 Go-Medium.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 146496 Feb 12 00:00 Go-Medium-Italic.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 138588 Feb 12 00:00 Go-Italic.ttf
+-rw-rw-r-- 1 ravitezu ravitezu   1913 Feb 12 00:00 README
+-rw-rw-r-- 1 ravitezu ravitezu 134988 Feb 12 00:00 Go-Regular.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 160760 Feb 12 00:00 Go-Mono.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 169824 Feb 12 00:00 Go-Mono-Italic.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 164936 Feb 12 00:00 Go-Mono-Bold.ttf
+-rw-rw-r-- 1 ravitezu ravitezu 173600 Feb 12 00:00 Go-Mono-Bold-Italic.ttf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Each font has its own name (You can see the font name on the top of installer window which is opened when you double clcik on the ttf file) and I have installed &amp;ldquo;Go-Medium&amp;rdquo; (File: Go-Medium.ttf) on my machine. I am saying this because, you have to know the font name to use it on your vscode.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Using gofont on vscode:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Open vscode and click &amp;ldquo;File&amp;rdquo; (if you are on Linux) or &amp;ldquo;Code&amp;rdquo; (if you are on Mac OS X).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Now select &amp;ldquo;Preferences&amp;rdquo; &amp;gt; &amp;ldquo;Settings&amp;rdquo; and now you will see a &amp;ldquo;settings.json&amp;rdquo; file with empty braces, if you don&amp;rsquo;t have any settings defined.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add the following line into those braces and save the file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;&amp;quot;editor.fontFamily&amp;quot;:&amp;quot;Go Medium&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You &amp;ldquo;settings.json&amp;rdquo; file content should look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// Place your settings in this file to overwrite the default settings
+{
+&amp;quot;editor.fontFamily&amp;quot;:&amp;quot;Go Medium&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you have any other setting along with the fontFamily setting above, you would need to seperate those setting with a comma, like the following:&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// Place your settings in this file to overwrite the default settings
+{
+    &amp;quot;editor.fontFamily&amp;quot;:&amp;quot;Go Medium&amp;quot;,
+    &amp;quot;something.something&amp;quot;: &amp;quot;something-here&amp;quot;,
+    &amp;quot;anything.anything&amp;quot;: &amp;quot;anything-here&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
