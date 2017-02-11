@@ -16,7 +16,7 @@
       <pubDate>Sat, 11 Feb 2017 23:15:01 +0530</pubDate>
       
       <guid>http://blog.ravitezu.me/2017/02/11/installing-gofont-on-ubuntu-and-mac-for-vscode/</guid>
-      <description>&lt;p&gt;You would probably know that, there&amp;rsquo;s a new font type called &lt;a href=&#34;https://blog.golang.org/go-fonts&#34;&gt;&amp;ldquo;gofont&amp;rdquo;&lt;/a&gt; specially designed for go programing and this post will show you, how to install &lt;em&gt;gofont&lt;/em&gt; on your Ubuntu or Mac OS X machine and then use it for writing go programs on &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;vscode&lt;/a&gt; (which is one of the good IDEs avaiable today for golang).&lt;/p&gt;
+      <description>&lt;p&gt;You would probably know that, there&amp;rsquo;s a new font type called &lt;a href=&#34;https://blog.golang.org/go-fonts&#34;&gt;&amp;ldquo;gofont&amp;rdquo;&lt;/a&gt; specially designed for go programing and this post will show you, how to install &lt;em&gt;gofont&lt;/em&gt; on your Ubuntu or Mac OS X machine and then use it on &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;vscode&lt;/a&gt; (which is one of the good IDEs avaiable today for golang).&lt;/p&gt;
 
 &lt;p&gt;Here&amp;rsquo;s the tweet about &lt;em&gt;gofont&lt;/em&gt; from official golang twitter account:&lt;/p&gt;
 
