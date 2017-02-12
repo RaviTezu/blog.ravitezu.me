@@ -17,11 +17,6 @@
   </url>
   
   <url>
-    <loc>http://blog.ravitezu.me/page/contact/</loc>
-    <lastmod>2016-09-18T21:02:30+05:30</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.ravitezu.me/page/about/</loc>
     <lastmod>2016-09-18T21:02:20+05:30</lastmod>
   </url>
@@ -39,6 +34,10 @@
   <url>
     <loc>http://blog.ravitezu.me/2014/04/14/git-status-and-branch-name/</loc>
     <lastmod>2014-04-14T16:20:02+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.ravitezu.me/page/contact/</loc>
   </url>
   
 </urlset>

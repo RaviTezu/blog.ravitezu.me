@@ -7,17 +7,8 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Ravi Teja Pothana</copyright>
-    <lastBuildDate>Sun, 18 Sep 2016 21:02:30 +0530</lastBuildDate>
+    <lastBuildDate>Sun, 18 Sep 2016 21:02:20 +0530</lastBuildDate>
     <atom:link href="http://blog.ravitezu.me/page/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>contact</title>
-      <link>http://blog.ravitezu.me/page/contact/</link>
-      <pubDate>Sun, 18 Sep 2016 21:02:30 +0530</pubDate>
-      
-      <guid>http://blog.ravitezu.me/page/contact/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>about</title>
@@ -25,7 +16,34 @@
       <pubDate>Sun, 18 Sep 2016 21:02:20 +0530</pubDate>
       
       <guid>http://blog.ravitezu.me/page/about/</guid>
-      <description></description>
+      <description>&lt;p&gt;Hi there, I&amp;rsquo;am &lt;strong&gt;RaviTeja Pothana&lt;/strong&gt;. On the internet, I am &lt;a href=&#34;https://www.google.co.in/search?q=ravitezu&#34;&gt;RaviTezu&lt;/a&gt;.
+I am a Software Engineer from &lt;a href=&#34;https://en.wikipedia.org/wiki/Hyderabad&#34;&gt;Hyderabad, India&lt;/a&gt; and an aspiring Entrepreneur.&lt;/p&gt;
+
+&lt;p&gt;I love building robust and high quality software. I am an autodidact and always eager to apply the knowledge and skills I have acquired.
+I believe in &amp;ldquo;Picking the right tool for the right job&amp;rdquo; and I always try to update my knapsack with different technologies.&lt;/p&gt;
+
+&lt;p&gt;I love my work and enjoy each new project as I get it.
+Feel free to have at look my blog and don&amp;rsquo;t hesitate to &lt;a href=&#34;http://ravitezu.me/&#34;&gt;contact&lt;/a&gt; me if you think I can be of any help.&lt;/p&gt;
+
+&lt;p&gt;Thanks for stopping by :)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://blog.ravitezu.me/page/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.ravitezu.me/page/contact/</guid>
+      <description>&lt;p&gt;&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&#34;refresh&#34; content=&#34;1;url=http://ravitezu.me&#34; /&gt;
+&lt;title&gt;Redirecting you to my contact page..&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;&lt;/p&gt;
+</description>
     </item>
     
   </channel>
